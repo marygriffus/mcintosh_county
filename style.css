@@ -1,0 +1,42 @@
+* {
+  font-family: 'Exo 2', sans-serif;
+  text-align: center;
+}
+
+.project {
+  border: 3px solid darkgrey;
+  max-width: 90%;
+  margin: 10px auto;
+}
+
+#mcmap {
+  margin: 0 auto;
+  height: 600px;
+  width: 800px;
+}
+
+h3 {
+  margin: 50px auto;
+  font-size: 24px;
+}
+
+button {
+  font-size: 15px;
+  position: fixed;
+  bottom: 10px;
+  left: 45%;
+}
+
+.original img {
+  height: 600px;
+  width: 800px;
+}
+
+.new {
+  display: block;
+  margin: 0 auto;
+}
+
+.original {
+  display: none;
+}

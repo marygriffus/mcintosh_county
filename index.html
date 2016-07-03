@@ -5,10 +5,19 @@
   <link href='https://api.tiles.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="http://d3js.org/queue.v1.min.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-<div id='mcmap' style="height: 600px; width: 800px;"></div>
+  <div class="project">
+    <div class="new">
+      <div id='mcmap'></div>
+    </div>
+    <div class="original">
+      <img src="http://cdn.loc.gov/service/pnp/ppmsca/33800/33897r.jpg" />
+    </div>
+    <button>Toggle chart view</button>
+  </div>
 <script src="mc.js"></script>
 </body>
 

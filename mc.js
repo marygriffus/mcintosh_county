@@ -1,7 +1,25 @@
+var button = document.querySelector("button")
+button.onclick = function(){
+  var newGraph = document.querySelector(".new")
+  var originalGraph = document.querySelector(".original")
+  if (newGraph.style.display !== "none") {
+    newGraph.style.display = "none";
+    originalGraph.style.display = "block";
+    // document.querySelector(".farm-tenant").style.backgroundColor = "#EEECE8";
+  } else {
+    newGraph.style.display = "block";
+    originalGraph.style.display = "none";
+    // document.querySelector(".farm-tenant").style.backgroundColor = "#E0D3C7";
+  }
+}
+
+
+
+
 // Map details
 L.mapbox.accessToken = 'pk.eyJ1IjoibWFyeWdyaWZmdXMiLCJhIjoiY2lveW1oZDIwMDF1bnU5bTR0YXVqMnhncyJ9.EZ2ZQzA058yoHJTvpWISig';
 var mcmap = L.mapbox.map('mcmap', 'mapbox.streets')
-  .setView([31.4627, -81.4839], 11)
+  .setView([31.4307, -81.4739], 11)
 
 var styleLayer = L.mapbox.styleLayer("mapbox://styles/marygriffus/cioymla89001qcim18697j8di")
   .addTo(mcmap)
