@@ -14,8 +14,6 @@ button.onclick = function(){
 }
 
 
-
-
 // Map details
 L.mapbox.accessToken = 'pk.eyJ1IjoibWFyeWdyaWZmdXMiLCJhIjoiY2lveW1oZDIwMDF1bnU5bTR0YXVqMnhncyJ9.EZ2ZQzA058yoHJTvpWISig';
 var mcmap = L.mapbox.map('mcmap', 'mapbox.streets')
@@ -29,12 +27,26 @@ var data = [
   { "coords" : [ 31.4817 , -81.6002 ]}
 ];
 
-// Loop through data and create d.LatLng
-data.forEach(function(d) {
+var red_data = [];
+red_coords.forEach(function(d){
+  var new_pair = [(31.1307 + .0004 * (1000 - d[1])), -81.8002 + .0004 * d[0]];
+  red_data.push({"coords" : new_pair});
+})
+console.log(red_data)
+red_data.forEach(function(d){
   d.LatLng = new L.LatLng(d.coords[0], d.coords[1]);
-});
+})
+
+red_data.forEach(function(d){
+  mcmap.addLayer(L.circle([d.coords[0], d.coords[1]], 50));
+})
+
+data.forEach(function(d){
+  d.LatLng = new L.LatLng(d.coords[0], d.coords[1]);
+})
+
 data.forEach(function(d) {
-  mcmap.addLayer(L.circle([d.coords[0], d.coords[1]], 800));
+  mcmap.addLayer(L.circle([d.coords[0], d.coords[1]], 50));
 });
 
 // Append <svg>
