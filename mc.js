@@ -13,50 +13,64 @@ button.onclick = function(){
   }
 }
 
-
+// MAP
 // Map details
 L.mapbox.accessToken = 'pk.eyJ1IjoibWFyeWdyaWZmdXMiLCJhIjoiY2lveW1oZDIwMDF1bnU5bTR0YXVqMnhncyJ9.EZ2ZQzA058yoHJTvpWISig';
 var mcmap = L.mapbox.map('mcmap', 'mapbox.streets')
-  .setView([31.4307, -81.4739], 11)
+  .setView([31.4607, -81.4739], 11)
 
 var styleLayer = L.mapbox.styleLayer("mapbox://styles/marygriffus/cioymla89001qcim18697j8di")
   .addTo(mcmap)
 
-// Sample Data
-var data = [
-  { "coords" : [ 31.4817 , -81.6002 ]}
-];
+//translating points from original map to latlng
+var start_y = 31.1927;
+var start_x = -81.6812;
+var scaling = 0.00046;
 
-var red_data = [];
+var data = [];
 red_coords.forEach(function(d){
-  var new_pair = [(31.1307 + .0004 * (1000 - d[1])), -81.8002 + .0004 * d[0]];
-  red_data.push({"coords" : new_pair});
-})
-console.log(red_data)
-red_data.forEach(function(d){
-  d.LatLng = new L.LatLng(d.coords[0], d.coords[1]);
+  var new_pair = [(start_y + scaling * (1000 - d[1])), start_x + scaling * d[0]];
+  data.push({"coords" : new_pair, "color" : "#b30000"});
 })
 
-red_data.forEach(function(d){
-  mcmap.addLayer(L.circle([d.coords[0], d.coords[1]], 50));
+black_coords.forEach(function(d){
+  var new_pair = [(start_y + scaling * (1000 - d[1])), start_x + scaling * d[0]];
+  data.push({"coords" : new_pair, "color" : "#000000"});
+})
+
+blue_coords.forEach(function(d){
+  var new_pair = [(start_y + scaling * (1000 - d[1])), start_x + scaling * d[0]];
+  data.push({"coords" : new_pair, "color" : "#0000ff"});
+})
+
+green_coords.forEach(function(d){
+  var new_pair = [(start_y + scaling * (1000 - d[1])), start_x + scaling * d[0]];
+  data.push({"coords" : new_pair, "color" : "#00ff00"});
+})
+
+yellow_coords.forEach(function(d){
+  var new_pair = [(start_y + scaling * (1000 - d[1])), start_x + scaling * d[0]];
+  data.push({"coords" : new_pair, "color" : "#ffff00"});
 })
 
 data.forEach(function(d){
   d.LatLng = new L.LatLng(d.coords[0], d.coords[1]);
 })
 
-data.forEach(function(d) {
-  mcmap.addLayer(L.circle([d.coords[0], d.coords[1]], 50));
-});
+data.forEach(function(d){
+  var circle = L.circle([d.coords[0], d.coords[1]], 50, {
+    color: d.color,
+    fillColor: d.color,
+    fillOpacity: 0.8
+  }).addTo(mcmap)
+})
 
 // Append <svg>
 var svg = d3.select(mcmap.getPanes().overlayPane).append("svg")
-  .attr("class", "leaflet-zoom-animated")
-  .attr("width", window.innerWidth)
-  .attr("height", window.innerHeight);
+  .attr("class", "leaflet-zoom-animated");
 
 // Append <g> to svg
-var g = svg.append("g").attr("class", "leaflet-zoom-hide");
+var g = svg.append("g").attr("class", "leaflet-zoom-hide")
 
 // Append <circle> to <g>
 var circles = g.selectAll("circle")
@@ -80,14 +94,7 @@ function update() {
 function translateSVG() {
     var viewBoxLeft = document.querySelector("svg.leaflet-zoom-animated").viewBox.animVal.x;
     var viewBoxTop = document.querySelector("svg.leaflet-zoom-animated").viewBox.animVal.y;
-    // Reszing width and height incase of window resize
-    svg.attr("width", window.innerWidth)
-    svg.attr("height", window.innerHeight)
-    // Adding the ViewBox attribute to our SVG to contain it
-    svg.attr("viewBox", function () {
-        return "" + viewBoxLeft + " " + viewBoxTop + " "  + window.innerWidth + " " + window.innerHeight;
-    });
-    // Adding the style attribute to our SVG to transkate it
+    // Adding the style attribute to our SVG to translate it
     svg.attr("style", function () {
         return "transform: translate3d(" + viewBoxLeft + "px, " + viewBoxTop + "px, 0px);";
     });
