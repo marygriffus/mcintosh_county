@@ -23,9 +23,9 @@ var styleLayer = L.mapbox.styleLayer("mapbox://styles/marygriffus/cioymla89001qc
   .addTo(mcmap)
 
 //translating points from original map to latlng
-var start_y = 31.1827;
-var start_x = -81.6772;
-var scaling = 0.00047;
+var start_y = 31.1797;
+var start_x = -81.6762;
+var scaling = 0.00046;
 var colors = ["red", "green", "blue", "black", "yellow"];
 
 var data = [];
@@ -62,7 +62,7 @@ data.forEach(function(d){
   var circle = L.circle([d.coords[0], d.coords[1]], 50, {
     color: d.color,
     fillColor: d.color,
-    fillOpacity: 0.8
+    fillOpacity: 0.9
   }).addTo(mcmap)
 })
 
@@ -106,15 +106,19 @@ var legend = L.control({position: 'bottomleft'});
 legend.onAdd = function(map){
 
   var div = L.DomUtil.create('div', 'info legend');
-  var labels = ["<h3><strong> McINTOSH COUNTY, GEORGIA </strong></h3>", "WHITE INHABITANTS, 1890 - 1,258", "NEGRO INHABITANTS, 1890 - 5,212", "DISTRIBUTION OF 3,000 NEGRO INHABITANTS", "OUTSIDE THE TOWN OF DARIEN", "TOTAL AREA OF COUNTY = 489 SQUARE MILES", "TOTAL LAND OWNED BY NEGROS, 1989,  13,760 ACRES"];
+  var labels = ["<h3><strong> McINTOSH COUNTY, GEORGIA </strong></h3>", "WHITE INHABITANTS, 1890 - 1,258", "NEGRO INHABITANTS, 1890 - 5,212", "DISTRIBUTION OF 3,000 NEGRO INHABITANTS", "OUTSIDE THE TOWN OF DARIEN"];
   var cats = ["WELL-TO-DO", "BETTER CLASS OF LABORERS<br>AND SMALL FARMERS", "POOR", "LOWEST CLASS", "APPROXIMATE DISTRIBUTION OF WHITES"];
+  var subscript = ["TOTAL AREA OF COUNTY = 489 SQUARE MILES", "TOTAL LAND OWNED BY NEGROS, 1989,  13,760 ACRES"];
 
   for (var i = 0; i < labels.length; i++) {
       div.innerHTML += '<p>' + labels[i] + '</p>'
   }
-
   for (var i = 0; i < cats.length; i++) {
     div.innerHTML += '<i style="background:' + colors[i] + '"></i> <p>' + cats[i] + '<p>'
+  }
+  div.innerHTML += '<br>'
+  for (var i = 0; i < subscript.length; i++) {
+      div.innerHTML += '<p>' + subscript[i] + '</p>'
   }
 
   return div;

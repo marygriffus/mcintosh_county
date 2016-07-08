@@ -11,7 +11,7 @@
 
 #mcmap {
   margin: 0 auto;
-  height: 600px;
+  height: 500px;
   width: 800px;
 }
 
@@ -52,8 +52,9 @@ button {
 }
 .legend i {
     border-radius: 50%;
-    width: 14px;
-    height: 14px;
+    width: 10px;
+    height: 10px;
     float: left;
+    border: 1px solid black;
     margin-right: 8px;
 }
