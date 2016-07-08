@@ -23,9 +23,9 @@ var styleLayer = L.mapbox.styleLayer("mapbox://styles/marygriffus/cioymla89001qc
   .addTo(mcmap)
 
 //translating points from original map to latlng
-var start_y = 31.1927;
-var start_x = -81.6812;
-var scaling = 0.00046;
+var start_y = 31.1877;
+var start_x = -81.6772;
+var scaling = 0.00047;
 
 var data = [];
 red_coords.forEach(function(d){
