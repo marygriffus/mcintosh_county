@@ -23,34 +23,35 @@ var styleLayer = L.mapbox.styleLayer("mapbox://styles/marygriffus/cioymla89001qc
   .addTo(mcmap)
 
 //translating points from original map to latlng
-var start_y = 31.1877;
+var start_y = 31.1827;
 var start_x = -81.6772;
 var scaling = 0.00047;
+var colors = ["red", "green", "blue", "black", "yellow"];
 
 var data = [];
 red_coords.forEach(function(d){
   var new_pair = [(start_y + scaling * (1000 - d[1])), start_x + scaling * d[0]];
-  data.push({"coords" : new_pair, "color" : "#b30000"});
-})
-
-black_coords.forEach(function(d){
-  var new_pair = [(start_y + scaling * (1000 - d[1])), start_x + scaling * d[0]];
-  data.push({"coords" : new_pair, "color" : "#000000"});
-})
-
-blue_coords.forEach(function(d){
-  var new_pair = [(start_y + scaling * (1000 - d[1])), start_x + scaling * d[0]];
-  data.push({"coords" : new_pair, "color" : "#0000ff"});
+  data.push({"coords" : new_pair, "color" : colors[0]});
 })
 
 green_coords.forEach(function(d){
   var new_pair = [(start_y + scaling * (1000 - d[1])), start_x + scaling * d[0]];
-  data.push({"coords" : new_pair, "color" : "#00ff00"});
+  data.push({"coords" : new_pair, "color" : colors[1]});
+})
+
+blue_coords.forEach(function(d){
+  var new_pair = [(start_y + scaling * (1000 - d[1])), start_x + scaling * d[0]];
+  data.push({"coords" : new_pair, "color" : colors[2]});
+})
+
+black_coords.forEach(function(d){
+  var new_pair = [(start_y + scaling * (1000 - d[1])), start_x + scaling * d[0]];
+  data.push({"coords" : new_pair, "color" : colors[3]});
 })
 
 yellow_coords.forEach(function(d){
   var new_pair = [(start_y + scaling * (1000 - d[1])), start_x + scaling * d[0]];
-  data.push({"coords" : new_pair, "color" : "#ffff00"});
+  data.push({"coords" : new_pair, "color" : colors[4]});
 })
 
 data.forEach(function(d){
@@ -99,6 +100,26 @@ function translateSVG() {
         return "transform: translate3d(" + viewBoxLeft + "px, " + viewBoxTop + "px, 0px);";
     });
 }
+
+// Add text and legend
+var legend = L.control({position: 'bottomleft'});
+legend.onAdd = function(map){
+
+  var div = L.DomUtil.create('div', 'info legend');
+  var labels = ["<h3><strong> McINTOSH COUNTY, GEORGIA </strong></h3>", "WHITE INHABITANTS, 1890 - 1,258", "NEGRO INHABITANTS, 1890 - 5,212", "DISTRIBUTION OF 3,000 NEGRO INHABITANTS", "OUTSIDE THE TOWN OF DARIEN", "TOTAL AREA OF COUNTY = 489 SQUARE MILES", "TOTAL LAND OWNED BY NEGROS, 1989,  13,760 ACRES"];
+  var cats = ["WELL-TO-DO", "BETTER CLASS OF LABORERS<br>AND SMALL FARMERS", "POOR", "LOWEST CLASS", "APPROXIMATE DISTRIBUTION OF WHITES"];
+
+  for (var i = 0; i < labels.length; i++) {
+      div.innerHTML += '<p>' + labels[i] + '</p>'
+  }
+
+  for (var i = 0; i < cats.length; i++) {
+    div.innerHTML += '<i style="background:' + colors[i] + '"></i> <p>' + cats[i] + '<p>'
+  }
+
+  return div;
+};
+legend.addTo(mcmap)
 
 // Re-draw on reset, this keeps the markers where they should be on reset/zoom
 mcmap.on("moveend", update);

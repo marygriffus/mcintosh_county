@@ -40,3 +40,20 @@ button {
 .original {
   display: none;
 }
+
+.legend {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.legend p {
+  font-size: 10px;
+  line-height: 14px;
+  text-align: left;
+}
+.legend i {
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    float: left;
+    margin-right: 8px;
+}
